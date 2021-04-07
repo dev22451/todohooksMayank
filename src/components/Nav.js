@@ -1,6 +1,9 @@
 import React from 'react'
 
-function Nav() {
+function Nav(props) {
+    const addTodo = () => {
+        props.setTodo([...props.todoList, "todo " + (props.todoList.length + 1)])
+    }
     return (
         <nav className="navbar navbar-light bg-light">
             <div className="container-fluid">
@@ -8,7 +11,7 @@ function Nav() {
 
                 <ul className="nav">
                     <li className="nav-item">
-                        <button className="btn btn-primary">Add Todo</button>
+                        <button className="btn btn-primary" onClick={addTodo}>Add Todo</button>
                     </li>
                 </ul>
 
