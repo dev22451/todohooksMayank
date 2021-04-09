@@ -1,8 +1,9 @@
 import React from 'react'
 
 function Nav(props) {
+
     const addTodo = () => {
-        props.setTodo([...props.todoList, "todo " + (props.todoList.length + 1)])
+        props.toggleDisplayForm()
     }
     return (
         <nav className="navbar navbar-light bg-light">

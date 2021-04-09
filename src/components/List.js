@@ -1,28 +1,34 @@
 
 function List(props) {
 
-    const addTodo = () => {
-        props.setTodo([...props.todoList, "todo " + (props.todoList.length + 1)])
-    }
-
     return (
         <div className="container-fluid">
             <div className="row">
-                <ul className="list-group">
-                    {
-                        props.todoList.map((item, index) => {
-                            return <li id={index} className="list-group-item d-flex justify-content-between align-items-center">
-                                {item}
-                                <span className="badge bg-danger rounded-pill">&times;</span>
+                <div className="col-md-4"></div>
+                <div className="col-md-4">
+                    <ul className="list-group">
+                        {
+                            props.todoList.map((item, index) => {
+                                return <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>
+                                        <div className="form-check form-switch">
+                                            <input checked={item.completed} onChange={() => props.markTodo(index)} className="form-check-input" type="checkbox" />
+                                        </div>
+                                    </span>
+
+                                    {item.text}
+                                    <small>{item.duedate.toLocaleString()}</small>
+                                    {item.completed === true && <span>&#10004;</span>}
+                                    {item.completed === true && <span onClick={() => props.deleteTodo(index)} className="badge bg-danger rounded-pill">&times;</span>}
 
 
-                            </li>
-                        })
-                    }
-                    <li className="list-group-item d-flex justify-content-between align-items-center">
-                        <button type="button" className="btn btn-primary" onClick={addTodo}>Add Random Test Todo</button>
-                    </li>
-                </ul>
+
+                                </li>
+                            })
+                        }
+                    </ul>
+                </div>
+                <div className="col-md-4"></div>
             </div>
 
 
