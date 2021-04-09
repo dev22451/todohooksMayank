@@ -1,23 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import Nav from './components/Nav'
+import List from './components/List'
+import AddTodoForm from './components/AddTodo'
+import useTodoList from './hooks/todo'
+import useDisplayForm from './hooks/displaytoggleform'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+
 
 function App() {
+  let [todoList, addTodo, markTodo, deleteTodo] = useTodoList(["todo 1", "todo 2", "todo 3"])
+
+  const [displayForm, toggleDisplayForm] = useDisplayForm(false)
+
+  let addform = null
+  let list = <List todoList={todoList} markTodo={markTodo} deleteTodo={deleteTodo} />
+
+  if (displayForm) {
+    addform = <AddTodoForm addTodo={addTodo} toggleDisplayForm={toggleDisplayForm} />
+    list = null
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Nav toggleDisplayForm={toggleDisplayForm} />
+      {addform}
+      {list}
     </div>
   );
 }
